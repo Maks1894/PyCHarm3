@@ -35,7 +35,7 @@
 # Zadbaj też o prawidłowe typy danych.
 print("Witam w programie  naszego sklepu butow sportowych")
 print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
@@ -47,15 +47,15 @@ koniec - koniec dzialania.
 """)
 konto = 0
 magazyn = {
-    "Adidas": [ 10, 500],
+    "Adidas": [10, 500],
     "Nike": [7, 600],
     "New balance": [9, 400],
-    "Rebok": [15, 300],
+    "Reebok": [15, 300],
 }
 historia = []
 while True :
     komenda = input("Wpisz komende (wpisz \"koniec\" gdy chcesz skonczyc): ").lower()
-    print(f"Wpisales komede {komenda}")
+    print(f"Wpisales komende {komenda}")
     if komenda == "koniec" :
         print("Koniec progarmu")
         historia.append(komenda)
@@ -83,18 +83,19 @@ while True :
             liczba = int(input(f"Podaj ilos par butow '{tytul}' ktore chcesz sprzedac: "))
             if magazyn[tytul][0] >= liczba  and liczba > 0:
                 magazyn[tytul][0] -= liczba
-                if magazyn[tytul][0] == 0:
-                    del magazyn[tytul]
-                konto += liczba*magazyn[tytul][1]
+                konto += liczba * magazyn[tytul][1]
                 print(f"Sprzedales {liczba} par butow '{tytul}' ")
                 historia.append(f"Sprzedales {liczba} par butow '{tytul}' ")
+                if magazyn[tytul][0] == 0:
+                    del magazyn[tytul]
+
             elif liczba == 0:
                 print('Ilosz parz sprzedawanych butow musi byc wieksza od 0')
             else :
                 print(f" Brak wystarczajacej ilosci par butow '{tytul}' ")
                 historia.append(f" Brak wystarczajacej ilosci par butow '{tytul}' ")
         print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
@@ -110,9 +111,14 @@ koniec - koniec dzialania.
         if tytul in magazyn and liczba > 0:
             magazyn[tytul][0] += liczba
             cena = magazyn[tytul][1]
-            konto -= cena * liczba
-            print(f'Zakupiles do sklepu buty: {tytul}, ilosc par: {liczba}, cena jednostki: {cena}')
-            historia.append(f'Zakupiles do sklepu buty: {tytul}, ilosc par: {liczba}, cena jednostki: {cena}')
+            koszt = cena*liczba
+            if konto > koszt:
+                konto -= koszt
+                print(f'Zakupiles do sklepu buty: {tytul}, ilosc par: {liczba}, cena jednostki: {cena}')
+                historia.append(f'Zakupiles do sklepu buty: {tytul}, ilosc par: {liczba}, cena jednostki: {cena}')
+            else:
+                print("Brakuje srodkow na koncie")
+                historia.append("Brakuje srodkow na koncie")
         else:
             if liczba <=0:
                 print("Wpisz poprawna ilos par butow")
@@ -125,7 +131,7 @@ koniec - koniec dzialania.
                     historia.append(f'Zakupiles do sklepu buty: {tytul}, ilosc par: {liczba}, cena jednostki: {cena}')
                 else: print("Cena musi byc wiecej od 0")
         print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
@@ -139,7 +145,7 @@ koniec - koniec dzialania.
         print(f"Aktualnu stan konta sklepu {konto} zl.")
         historia.append(f"Aktualnu stan konta sklepu {konto} zl.")
         print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
@@ -151,13 +157,13 @@ koniec - koniec dzialania.
             """)
     elif komenda == "lista":
         if magazyn:
-            print("Dotepny buty sportowe:")
+            print("Dotepne buty sportowe:")
             for tytul, (liczba_sztuk, cena) in magazyn.items():
                 print(f"buty: {tytul}, ilosc:{liczba_sztuk} par, cena: {cena} zl.")
         else:
             print("Brak butow na magazynie")
         print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
@@ -174,7 +180,7 @@ koniec - koniec dzialania.
         else:
             print(f"Buty {tytul} nie sa dostepne")
         print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
@@ -197,7 +203,7 @@ koniec - koniec dzialania.
             for i in historia:
                 print(f"- {i}")
         print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
@@ -208,9 +214,9 @@ przeglad - podaz zakres czasy od - do zeby wyswetlic historie wukonanych operacj
 koniec - koniec dzialania.
         """)
     else:
-        print("Nie ma takiek komendy,wpisz komende z listy")
+        print("Nie ma takiej komendy,wpisz komende z listy")
         print("""
-Lista dotepnych komed:
+Lista dotepnych komend:
 saldo - Wprowadz kwote ktora chcesz dodac lub odjac z konta firmy.
 sprzedaz - podaj nazwe cene i ilos produkta ktory chcesz spzedac
 zakup - podaj nazwe cene i ilos produkta ktory chcesz kupic
