@@ -1,0 +1,8 @@
+Adidas, 10, 500
+Nike, 7, 600
+New balance, 9, 400
+Reebok, 15, 300
+Puma, 20, 500
+Jordan, 30, 700
+Fila, 15, 800
+Dc, 10, 1000
